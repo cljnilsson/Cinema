@@ -1,0 +1,38 @@
+package cinema
+
+force f = bj_FORCE_PLAYER[0]
+
+public class cinema
+    static function forceSubtitles()
+        ForceCinematicSubtitles(true)
+
+    static function on()
+        CinematicModeExBJ(true, f, bj_CINEMODE_INTERFACEFADE)
+
+    static function off()
+        CinematicModeExBJ(false, f, bj_CINEMODE_INTERFACEFADE)
+
+    static function fadeIn(real duration)
+        CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, duration, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+
+    static function fadeOut(real duration)
+        CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, duration, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+
+    static function userControllOn()
+        if (IsPlayerInForce(GetLocalPlayer(),f))
+            EnableUserControl(true)
+
+    static function userControllOff()
+        if (IsPlayerInForce(GetLocalPlayer(),f))
+            EnableUserControl(false)
+
+    static function occlusionOn()
+        if (IsPlayerInForce(GetLocalPlayer(), f))
+            EnableOcclusion(true)
+
+    static function occlusionOff()
+        if (IsPlayerInForce(GetLocalPlayer(), f))
+                EnableOcclusion(false)
+init
+    cinema.forceSubtitles()
+    cinema.occlusionOn()
