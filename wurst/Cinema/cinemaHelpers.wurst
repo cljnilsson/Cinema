@@ -1,0 +1,18 @@
+package cinemaHelpers
+
+force f = bj_FORCE_PLAYER[0]
+
+public sound lastSound
+
+public function unit.talk(string text, real duration)
+    TransmissionFromUnitWithNameBJ(f, this, this.getName(), null, text, bj_TIMETYPE_ADD, duration, true)
+
+public function unit.walk(vec2 pos)
+    this.issuePointOrder("move", pos)
+
+public function sound.length() returns real
+    return I2R(GetSoundDuration(this)) * 0.001
+
+public function sound.start()
+    StartSound(this)
+    lastSound = this

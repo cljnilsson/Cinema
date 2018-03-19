@@ -1,0 +1,395 @@
+package test
+
+import Camerasetup
+import camera
+import cinema
+import cinemaHelpers
+import scene
+import Fade
+
+camerasetup cam = gg_cam_Camera_001
+
+function code.newScene() returns Scene
+    return new Scene(this)
+
+function start()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 25)
+        gg_snd_H01Uther01.start()
+    else if counter == 2
+        gg_snd_H01Arthas02.start()
+    else if counter == 3
+        gg_snd_H01Uther03.start()
+        cam = gg_cam_Camera_029
+        cam.apply(0)
+        cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 25)
+    else if counter == 4
+        gg_snd_H01Arthas04.start()
+    else if counter == 5
+        gg_snd_H01Uther05.start()
+    else
+        cinema.fadeOut(1)
+        destroy Scene.current
+
+function meetJaina()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_002
+        cam.apply(0)
+        cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 35)
+        gg_snd_H03Arthas05.start()
+    else if counter == 2
+        gg_snd_H03Arthas06.start()
+    else if counter == 3
+        gg_snd_H03Jaina07.start()
+    else if counter == 4
+        cam = gg_cam_Camera_003
+        cam.apply(15)
+        gg_snd_H03Jaina09.start()
+    else if counter == 5
+        gg_snd_H03Arthas19.start()
+    else if counter == 6
+        gg_snd_H03Jaina20.start()
+    else
+        cinema.fadeOut(1)
+        destroy Scene.current
+
+function meetKel()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.setSky(Sky.foggy)
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_004
+        cam.apply(0)
+        gg_cam_Camera_005.apply(25)
+        gg_snd_H04KelThuzad06.start()
+    else if counter == 2
+        gg_snd_H04Arthas22.start()
+    else if counter == 3
+        cinema.flashLightning()
+        gg_snd_H04KelThuzad23.start()
+    else if counter == 4
+        gg_snd_H04KelThuzad25.start()
+        cam = gg_cam_Camera_006
+        cam.apply(0)
+        gg_cam_Camera_030.apply(25)
+    else if counter == 5
+        gg_snd_H04Arthas26.start()
+    else if counter == 6
+        gg_snd_H04KelThuzad27.start()
+    else
+        cinema.fadeOut(1)
+        destroy Scene.current
+
+function savedByUther()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.setSky(Sky.summer)
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_008
+        cam.apply(0)
+        cam.setAttribute(attribute.TARGET_DISTANCE, 1200, 25)
+        gg_snd_H05Uther30.start()
+    else if counter == 2
+        gg_snd_H05Arthas31.start()
+    else if counter == 3
+        gg_snd_H05Uther32.start()
+        cam = gg_cam_Camera_031
+        cam.apply(0)
+        cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 25)
+    else if counter == 4
+        gg_snd_H05Arthas33.start()
+    else if counter == 5
+        gg_snd_H05Uther34.start()
+    else if counter == 6
+        gg_snd_H05Arthas35.start()
+    else
+        cinema.fadeOut(1)
+        destroy Scene.current
+
+function meetGuardian()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_009
+        cam.apply(0)
+        cam.setAttribute(attribute.TARGET_DISTANCE, 900, 20)
+        gg_snd_H05Medivh36.start()
+    else if counter == 2
+        gg_snd_H05Medivh38.start()
+    else if counter == 3
+        cam = gg_cam_Camera_010
+        cam.apply(5)
+        gg_snd_H05Arthas39.start()
+    else if counter == 4
+        cam.setAttribute(attribute.TARGET_DISTANCE, 800, 30)
+        gg_snd_H05Medivh40.start()
+        gg_unit_nmed_0056.fadeOut(gg_snd_H05Medivh40.length())
+    else if counter == 5
+        gg_unit_nmed_0056.remove()
+        gg_snd_H05Jaina43.start()
+    else if counter == 6
+        gg_snd_H05Arthas44.start()
+    else
+        cinema.fadeOut(1)
+        destroy Scene.current
+
+function stratholme()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_011
+        cam.apply(0)
+        cam = gg_cam_Camera_012
+        cam.apply(15)
+        gg_snd_H06Arthas04.start()
+    else if counter == 2
+        gg_snd_H06Arthas06.start()
+    else if counter == 3
+        gg_snd_H06Uther07.start()
+    else if counter == 4
+        gg_snd_H06Arthas08.start()
+        camera.rotate(vec2(cam.getX(), cam.getY()), 360, 95)
+    else if counter == 5
+        gg_snd_H06Uther09.start()
+    else if counter == 6
+        gg_snd_H06Arthas10.start()
+    else if counter == 7
+        gg_snd_H06Uther11.start()
+    else if counter == 8
+        gg_snd_H06Arthas12.start()
+    else if counter == 9
+        gg_snd_H06Jaina13.start()
+    else if counter == 10
+        gg_snd_H06Arthas14.start()
+    else if counter == 11
+        gg_snd_H06Uther15.start()
+        gg_unit_Huth_0058.fadeOut(gg_snd_H06Uther15.length())
+    else if counter == 12
+        gg_unit_Huth_0058.remove()
+        gg_snd_H06Arthas16.start()
+    else if counter == 13
+        gg_snd_H06Jaina17.start()
+    else
+        cinema.fadeOut(1)
+        
+        destroy Scene.current
+
+function meetMalganis()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.setSky(Sky.felwood)
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_013
+        cam.apply(0)
+        cam = gg_cam_Camera_014
+        cam.apply(25)
+        ConditionalTriggerExecute( gg_trg_Zombie_Sequence )
+        gg_snd_H06MalGanis31.start()
+    else if counter == 2
+        gg_snd_H06MalGanis32.start()
+    else if counter == 3
+        cinema.flashLightning()
+        cam = gg_cam_Camera_015
+        cam.apply(15)
+        gg_snd_H06Arthas43.start()
+    else if counter == 4
+        gg_snd_H06MalGanis44.start()
+    else if counter == 5
+        cam = gg_cam_Camera_016
+        cam.apply(0)
+        cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 25)
+        gg_snd_H06MalGanis45.start()
+    else if counter == 6
+        gg_snd_H06Arthas46.start()
+    else
+        cinema.fadeOut(1)
+        destroy Scene.current
+
+function jainaAndUther()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_017
+        cam.apply(0)
+        cam.setAttribute(attribute.TARGET_DISTANCE, 600, 30)
+        gg_snd_H06Jaina50.start()
+    else if counter == 2
+        gg_snd_H06Uther51.start()
+    else if counter == 3
+        gg_snd_H06Jaina52.start()
+    else if counter == 4
+        gg_snd_H06Uther53.start()
+    else
+        cinema.fadeOut(1)
+        destroy Scene.current
+
+function burnShips()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.setSky(Sky.winter)
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_018
+        cam.apply(0)
+        cam = gg_cam_Camera_019
+        cam.apply(35)
+        gg_snd_H08Arthas08.start()
+    else if counter == 2
+        gg_snd_H08Muradin09.start()
+    else if counter == 3
+        gg_unit_Hart_0106.setAnimation("Stand Victory")
+        gg_snd_H08Arthas10.start()
+    else if counter == 4
+        gg_snd_H08Arthas13.start()
+    else if counter == 4
+        gg_snd_H08Arthas21.start()
+    else
+        cinema.fadeOut(1)
+        destroy Scene.current
+
+
+function confrontArthas()
+    integer counter = Scene.current.counter
+    if counter == 1
+        gg_snd_H09Muradin01.start()
+    else if counter == 2
+        gg_snd_H09Arthas02.start()
+    else
+        destroy Scene.current
+
+function takeWeapon()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_020
+        cam.apply(0)
+        cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 60)
+        gg_snd_H09Arthas14.start()
+    else if counter == 2
+        gg_unit_Hmbr_0108.walk(vec2(gg_rct_Region_002.getCenterX(), gg_rct_Region_002.getCenterY()))
+        gg_snd_H09Muradin15.start()
+    else if counter == 3
+        gg_unit_Hmbr_0108.setFacing(gg_unit_Hmbr_0108.getPos().angleTo(gg_unit_Hart_0107.getPos()))
+        gg_snd_H09Arthas16.start()
+    else if counter == 4
+        gg_snd_H09Muradin17.start()
+    else if counter == 5
+        gg_snd_H09Arthas18.start()
+    else
+        cinema.fadeOut(1)
+        destroy Scene.current
+
+function killMalganis()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_021
+        cam.apply(0)
+        gg_cam_Camera_022.apply(20)
+        gg_snd_H09MalGanis25.start()
+    else if counter == 2
+        gg_snd_H09Arthas26.start()
+    else if counter == 3
+        gg_unit_Harf_0118.setTimeScale(0.05)
+        gg_unit_Harf_0118.setAnimation("attack")
+        gg_snd_H09MalGanis27.start()
+    else
+        cinema.fadeOut(1)
+        destroy Scene.current
+
+function utherDeath()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.setSky(Sky.fall)
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_023
+        cam.apply(0)
+        gg_cam_Camera_024.apply(35)
+        gg_snd_U02Uther21.start()
+    else if counter == 2
+        gg_snd_U02Uther23.start()
+    else if counter == 3
+        gg_snd_U02Arthas24.start()
+    else if counter == 4
+        gg_snd_U02Uther25.start()
+    else if counter == 5
+        gg_snd_U02Arthas26.start()
+    else
+        cinema.fadeOut(1)
+        destroy Scene.current
+
+function summery()
+    integer counter = Scene.current.counter
+    if counter == 1
+        cinema.fadeIn(2)
+        cam = gg_cam_Camera_025
+        cam.apply(0)
+        cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 55)
+        gg_snd_Misc_Tirion_LHPostFight09.start()
+    else if counter == 2
+        gg_snd_Misc_Tirion_LHPostFight10.start()
+    else if counter == 3
+        gg_snd_Misc_Tirion_LHPostFight11.start()
+    else if counter == 4
+        gg_snd_Misc_Tirion_LHPostFight12.start()
+    else if counter == 5
+        gg_unit_Hpb2_0136.setAnimation("Stand Victory")
+        gg_snd_Misc_Tirion_LHPostFight13.start()
+    else if counter == 6
+        gg_snd_Misc_Tirion_LHPostFight14.start()
+    else if counter == 7
+        gg_snd_Misc_Tirion_LHPostFight15.start()
+    else if counter == 8
+        ResetTerrainFogBJ()
+        FogMaskEnableOff()
+        FogEnableOff()
+        gg_unit_Hart_0035.setMoveSpeed(30)
+        gg_unit_Hart_0035.setTimeScale(0.1)
+        gg_unit_Hart_0035.walk(vec2(gg_rct_Region_009.getCenterX(), gg_rct_Region_009.getCenterY()))
+        cam = gg_cam_Camera_026
+        cam.apply(0)
+        gg_snd_past.start()
+    else if counter == 9
+        gg_unit_Hjai_0170.fadeOut(gg_snd_IC_Muradin_TurnIn06.length())
+        gg_snd_IC_Muradin_TurnIn06.start()
+    else if counter == 10
+        gg_unit_Huth_0171.fadeOut(gg_snd_IC_Muradin_TurnIn07.length())
+        gg_snd_IC_Muradin_TurnIn07.start()
+    else if counter == 11
+        gg_unit_Hmbr_0172.fadeOut(gg_snd_IC_Muradin_TurnIn08.length())
+        StopMusicBJ(true)
+        cinema.fadeOut(gg_snd_IC_Muradin_TurnIn08.length())
+        gg_snd_IC_Muradin_TurnIn08.start()
+    else
+        destroy Scene.current
+
+init
+    cinema.fadeOut(0)
+    cam.apply(0)
+    cinema.on()
+    cinema.fadeIn(5)
+
+    // -----------------------
+    function start.newScene()
+    function meetJaina.newScene()
+    function meetKel.newScene()
+    function savedByUther.newScene()
+    function meetGuardian.newScene()
+    function stratholme.newScene()
+    function meetMalganis.newScene()
+    function jainaAndUther.newScene()
+    function burnShips.newScene()
+    function confrontArthas.newScene()
+    function takeWeapon.newScene()
+    function killMalganis.newScene()
+    function utherDeath.newScene()
+    function summery.newScene()
+
+    CreateTimer()
+    ..start(4, () -> begin
+        Scene.first.start()
+        GetExpiredTimer().destr()
+    end)
+    

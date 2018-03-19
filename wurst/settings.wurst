@@ -1,0 +1,27 @@
+package settings
+
+function rect.makeBodiesInRegion()
+    for u in GetUnitsInRectAll(this)
+        u.setTimeScale(0)
+        u.setAnimation("Decay Flesh")
+
+init
+    StopMusicBJ(false)
+    ClearMapMusicBJ()
+    StopMusicBJ(false)
+    EnableDawnDusk(false)
+    StopSound(bj_nightAmbientSound, true, true)
+    StopSound(bj_dayAmbientSound, true, true)
+
+    SetSkyModel( "Environment\\Sky\\LordaeronSummerSky\\LordaeronSummerSky.mdl" )
+
+    for i = 0 to 11
+        for j = 0 to 11
+            SetPlayerAllianceStateBJ(players[i], players[j], bj_ALLIANCE_ALLIED)
+
+    gg_rct_Region_006.makeBodiesInRegion()
+    gg_rct_Region_007.makeBodiesInRegion()
+    gg_rct_Region_010.makeBodiesInRegion()
+    gg_rct_Region_011.makeBodiesInRegion()
+
+    PlayMusic("music.mp3")

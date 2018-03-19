@@ -1,8 +1,49 @@
 package cinema
 
+import TimerUtils
+import cinemaHelpers
+
 force f = bj_FORCE_PLAYER[0]
 
+public enum Sky
+    blizzard
+    dalaran
+    felwood
+    foggy
+    genetic
+    fall
+    summer
+    winter
+    outland
+
+function Sky.toString() returns string
+    string toReturn = ""
+    switch this
+        case Sky.blizzard
+            toReturn = "Environment\\Sky\\BlizzardSky\\BlizzardSky.mdl"
+        case Sky.dalaran
+            toReturn = "Environment\\Sky\\DalaranSky\\DalaranSky.mdl"
+        case Sky.felwood
+            toReturn = "Environment\\Sky\\FelwoodSky\\FelwoodSky.mdl"
+        case Sky.foggy
+            toReturn = "Environment\\Sky\\FoggedSky\\FoggedSky.mdl"
+        case Sky.genetic
+            toReturn = "Environment\\Sky\\Sky\\SkyLight.mdl"
+        case Sky.fall
+            toReturn = "Environment\\Sky\\LordaeronFallSky\\LordaeronFallSky.mdl"
+        case Sky.summer
+            toReturn = "Environment\\Sky\\LordaeronSummerSky\\LordaeronSummerSky.mdl"
+        case Sky.winter
+            toReturn = "Environment\\Sky\\LordaeronWinterSky\\LordaeronWinterSky.mdl"
+        case Sky.outland
+            toReturn = "Environment\\Sky\\Outland_Sky\\Outland_Sky.mdl"
+
+    return toReturn
+        
 public class cinema
+    static function setSky(Sky sky)
+        SetSkyModel(sky.toString())
+
     static function forceSubtitles()
         ForceCinematicSubtitles(true)
 
@@ -33,6 +74,19 @@ public class cinema
     static function occlusionOff()
         if (IsPlayerInForce(GetLocalPlayer(), f))
                 EnableOcclusion(false)
+
+    static function flashLightning()
+        CinematicFadeBJ( bj_CINEFADETYPE_FADEOUTIN, 0.12, "ReplaceableTextures\\CameraMasks\\White_mask.blp", 100.00, 100.00, 100.00, 5.00 )
+        getTimer()
+        ..start(0.2, () -> begin
+            CinematicFadeBJ( bj_CINEFADETYPE_FADEOUTIN, 0.12, "ReplaceableTextures\\CameraMasks\\White_mask.blp", 100.00, 100.00, 100.00, 5.00 )
+            GetExpiredTimer().destr()
+            getTimer()
+            ..start(0.2, () -> begin
+                gg_snd_RollingThunder1.start()
+            end)
+        end)
+
 init
     cinema.forceSubtitles()
-    cinema.occlusionOn()
+    //scinema.occlusionOn()

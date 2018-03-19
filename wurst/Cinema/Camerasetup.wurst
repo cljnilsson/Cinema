@@ -2,7 +2,7 @@ package Camerasetup
 
 player localPlayer = GetLocalPlayer()
 
-enum attribute
+public enum attribute
 	TARGET_DISTANCE
 	FARZ
 	ANGLE_OF_ATTACK
@@ -38,10 +38,24 @@ function attribute.A2CF() returns camerafield
 function player.isLocalPlayer() returns boolean
 	return this == localPlayer
 
-function camerasetup.apply(player p, real duration)
+public function camerasetup.apply(player p, real duration)
 	if (p.isLocalPlayer())
 		CameraSetupApplyForceDuration(this, true, duration)
 
-function camerasetup.setAttribute(attribute a, player p, real value, real duration)
+public function camerasetup.apply(real duration)
+	if (players[0].isLocalPlayer())
+		CameraSetupApplyForceDuration(this, true, duration)
+
+public function camerasetup.setAttribute(attribute a, real value, real duration)
+	if (players[0].isLocalPlayer())
+		SetCameraField(a.A2CF(), value, duration)
+
+public function camerasetup.setAttribute(attribute a, player p, real value, real duration)
 	if (p.isLocalPlayer())
 		SetCameraField(a.A2CF(), value, duration)
+
+public function camerasetup.getX() returns real
+	return CameraSetupGetDestPositionX(this)
+
+public function camerasetup.getY() returns real
+	return CameraSetupGetDestPositionY(this)

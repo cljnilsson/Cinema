@@ -1,0 +1,12 @@
+package counter
+
+int counter = 1
+
+function onLoop()
+    //ClearTextMessages()
+    //BJDebugMsg(I2S(counter))
+    counter++
+
+init
+    CreateTimer()
+    ..startPeriodic(1, function onLoop)

@@ -21,6 +21,10 @@ public class camera
     static function rotate(player p, vec2 target, real degrees, real duration)
         if(p.isLocalPlayer())
             SetCameraRotateMode(target.x, target.y, bj_DEGTORAD * degrees, duration)
+
+    static function rotate(vec2 target, real degrees, real duration)
+        if(players[0].isLocalPlayer())
+            SetCameraRotateMode(target.x, target.y, bj_DEGTORAD * degrees, duration)
     
     static function setSmoothing(real value)
         CameraSetSmoothingFactor(value)
