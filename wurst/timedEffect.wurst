@@ -1,0 +1,19 @@
+package timedEffect
+
+import TimerUtils
+
+hashtable hash = InitHashtable()
+
+public function effect.timed(real duration)
+    timer t = getTimer()
+
+    hash.saveEffectHandle(t.getHandleId(), 0, this)
+
+    t.start(duration, function onExpire)
+
+function onExpire()
+    timer t = GetExpiredTimer()
+    integer h = t.getHandleId()
+    hash.loadEffectHandle(h, 0).destr()
+    hash.flushChild(h)
+    t.release()

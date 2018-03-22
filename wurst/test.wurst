@@ -6,8 +6,21 @@ import cinema
 import cinemaHelpers
 import scene
 import Fade
+import timedEffect
+import TimerUtils
 
 camerasetup cam = gg_cam_Camera_001
+
+integer arthas   = 'Hart'
+integer uther    = 'Huth'
+integer jaina    = 'Hjai'
+integer kel      = 'uktn'
+integer mal      = 'Umal'
+integer muradin  = 'Hmbr'
+integer guardian = 'nmed'
+integer uarthas  = 'Uear'
+integer tirion   = 'Hpb2'
+integer fallen   = 'uske'
 
 function code.newScene() returns Scene
     return new Scene(this)
@@ -15,19 +28,25 @@ function code.newScene() returns Scene
 function start()
     integer counter = Scene.current.counter
     if counter == 1
-        cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 25)
+        gg_unit_Huth_0011.lookAt(gg_unit_Hart_0005)
         gg_snd_H01Uther01.start()
+        uther.talk("Uther")
     else if counter == 2
+        gg_unit_Hart_0005.lookAt(gg_unit_Huth_0011)
         gg_snd_H01Arthas02.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 3
         gg_snd_H01Uther03.start()
+        uther.talk("Uther")
         cam = gg_cam_Camera_029
         cam.apply(0)
         cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 25)
     else if counter == 4
         gg_snd_H01Arthas04.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 5
         gg_snd_H01Uther05.start()
+        uther.talk("Uther")
     else
         cinema.fadeOut(1)
         destroy Scene.current
@@ -35,23 +54,30 @@ function start()
 function meetJaina()
     integer counter = Scene.current.counter
     if counter == 1
-        cinema.fadeIn(2)
         cam = gg_cam_Camera_002
         cam.apply(0)
         cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 35)
+        cinema.fadeIn(2)
         gg_snd_H03Arthas05.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 2
+        SetUnitFacingToFaceUnitTimed( gg_unit_Hart_0020, gg_unit_Hjai_0019, 1.00 )
         gg_snd_H03Arthas06.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 3
         gg_snd_H03Jaina07.start()
+        jaina.talk("Jaina Proudmoore")
     else if counter == 4
         cam = gg_cam_Camera_003
-        cam.apply(15)
+        cam.apply(20)
         gg_snd_H03Jaina09.start()
+        jaina.talk("Jaina Proudmoore")
     else if counter == 5
         gg_snd_H03Arthas19.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 6
         gg_snd_H03Jaina20.start()
+        jaina.talk("Jaina Proudmoore")
     else
         cinema.fadeOut(1)
         destroy Scene.current
@@ -60,25 +86,31 @@ function meetKel()
     integer counter = Scene.current.counter
     if counter == 1
         cinema.setSky(Sky.foggy)
-        cinema.fadeIn(2)
+        cinema.fadeIn(2, Filter.dark)
         cam = gg_cam_Camera_004
         cam.apply(0)
         gg_cam_Camera_005.apply(25)
         gg_snd_H04KelThuzad06.start()
+        kel.talk("Kel'Thuzad")
     else if counter == 2
         gg_snd_H04Arthas22.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 3
         cinema.flashLightning()
         gg_snd_H04KelThuzad23.start()
+        kel.talk("Kel'Thuzad")
     else if counter == 4
-        gg_snd_H04KelThuzad25.start()
         cam = gg_cam_Camera_006
         cam.apply(0)
         gg_cam_Camera_030.apply(25)
+        gg_snd_H04KelThuzad25.start()
+        kel.talk("Kel'Thuzad")
     else if counter == 5
         gg_snd_H04Arthas26.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 6
         gg_snd_H04KelThuzad27.start()
+        kel.talk("Kel'Thuzad")
     else
         cinema.fadeOut(1)
         destroy Scene.current
@@ -87,24 +119,30 @@ function savedByUther()
     integer counter = Scene.current.counter
     if counter == 1
         cinema.setSky(Sky.summer)
-        cinema.fadeIn(2)
         cam = gg_cam_Camera_008
         cam.apply(0)
+        cinema.fadeIn(2, Filter.day)
         cam.setAttribute(attribute.TARGET_DISTANCE, 1200, 25)
         gg_snd_H05Uther30.start()
+        uther.talk("Uther")
     else if counter == 2
         gg_snd_H05Arthas31.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 3
-        gg_snd_H05Uther32.start()
         cam = gg_cam_Camera_031
         cam.apply(0)
         cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 25)
+        gg_snd_H05Uther32.start()
+        uther.talk("Uther")
     else if counter == 4
         gg_snd_H05Arthas33.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 5
         gg_snd_H05Uther34.start()
+        uther.talk("Uther")
     else if counter == 6
         gg_snd_H05Arthas35.start()
+        arthas.talk("Arthas Menethil")
     else
         cinema.fadeOut(1)
         destroy Scene.current
@@ -112,26 +150,33 @@ function savedByUther()
 function meetGuardian()
     integer counter = Scene.current.counter
     if counter == 1
-        cinema.fadeIn(2)
         cam = gg_cam_Camera_009
         cam.apply(0)
+        cinema.fadeIn(2, Filter.day)
         cam.setAttribute(attribute.TARGET_DISTANCE, 900, 20)
         gg_snd_H05Medivh36.start()
+        guardian.talk("Medivh")
     else if counter == 2
         gg_snd_H05Medivh38.start()
+        guardian.talk("Medivh")
     else if counter == 3
         cam = gg_cam_Camera_010
         cam.apply(5)
         gg_snd_H05Arthas39.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 4
         cam.setAttribute(attribute.TARGET_DISTANCE, 800, 30)
         gg_snd_H05Medivh40.start()
+        guardian.talk("Medivh")
         gg_unit_nmed_0056.fadeOut(gg_snd_H05Medivh40.length())
     else if counter == 5
         gg_unit_nmed_0056.remove()
+        SetUnitFacingToFaceUnitTimed(gg_unit_Hjai_0054, gg_unit_Hart_0055, 1)
         gg_snd_H05Jaina43.start()
+        jaina.talk("Jaina Proudmoore")
     else if counter == 6
         gg_snd_H05Arthas44.start()
+        arthas.talk("Arthas Menethil")
     else
         cinema.fadeOut(1)
         destroy Scene.current
@@ -139,39 +184,75 @@ function meetGuardian()
 function stratholme()
     integer counter = Scene.current.counter
     if counter == 1
-        cinema.fadeIn(2)
         cam = gg_cam_Camera_011
         cam.apply(0)
         cam = gg_cam_Camera_012
         cam.apply(15)
+        cinema.fadeIn(2)
         gg_snd_H06Arthas04.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 2
+        gg_unit_Hart_0057.walk(gg_rct_Region_019.getCenter())
         gg_snd_H06Arthas06.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 3
+        AddSpecialEffectTarget(exclamationMark, gg_unit_Huth_0058, "overhead").timed(1)
         gg_snd_H06Uther07.start()
+        uther.talk("Uther")
     else if counter == 4
-        gg_snd_H06Arthas08.start()
         camera.rotate(vec2(cam.getX(), cam.getY()), 360, 95)
+        gg_unit_Hart_0057.lookAt(gg_unit_Huth_0058)
+        gg_snd_H06Arthas08.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 5
         gg_snd_H06Uther09.start()
+        uther.talk("Uther")
     else if counter == 6
         gg_snd_H06Arthas10.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 7
+         gg_unit_Hart_0057.lookAt(gg_unit_Huth_0058)
         gg_snd_H06Uther11.start()
+        uther.talk("Uther")
     else if counter == 8
+        getTimer()
+        ..start(2, () -> begin
+            gg_unit_Hart_0057.setAnimation("Stand Victory")
+            GetExpiredTimer().release()
+        end)
         gg_snd_H06Arthas12.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 9
+        ResetUnitAnimation(gg_unit_Hart_0057)
+        gg_unit_Hart_0057.lookAt(gg_unit_Hjai_0059)
         gg_snd_H06Jaina13.start()
+        jaina.talk("Jaina Proudmoore")
     else if counter == 10
         gg_snd_H06Arthas14.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 11
-        gg_snd_H06Uther15.start()
+        gg_unit_Hart_0057.lookAt(gg_unit_Huth_0058)
         gg_unit_Huth_0058.fadeOut(gg_snd_H06Uther15.length())
+        gg_unit_hkni_0064.fadeOut(gg_snd_H06Uther15.length())
+        gg_unit_hkni_0065.fadeOut(gg_snd_H06Uther15.length())
+        gg_unit_hkni_0066.fadeOut(gg_snd_H06Uther15.length())
+        gg_unit_hkni_0067.fadeOut(gg_snd_H06Uther15.length())
+        gg_unit_hkni_0068.fadeOut(gg_snd_H06Uther15.length())
+        gg_snd_H06Uther15.start()
+        uther.talk("Uther")
     else if counter == 12
+        gg_unit_Hart_0057.lookAt(gg_unit_Hjai_0059)
         gg_unit_Huth_0058.remove()
+        gg_unit_hkni_0064.remove()
+        gg_unit_hkni_0065.remove()
+        gg_unit_hkni_0066.remove()
+        gg_unit_hkni_0067.remove()
+        gg_unit_hkni_0068.remove()
         gg_snd_H06Arthas16.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 13
         gg_snd_H06Jaina17.start()
+        jaina.talk("Jaina Proudmoore")
     else
         cinema.fadeOut(1)
         
@@ -181,29 +262,40 @@ function meetMalganis()
     integer counter = Scene.current.counter
     if counter == 1
         cinema.setSky(Sky.felwood)
-        cinema.fadeIn(2)
+        cinema.fadeIn(2, Filter.dark)
         cam = gg_cam_Camera_013
         cam.apply(0)
         cam = gg_cam_Camera_014
         cam.apply(25)
         ConditionalTriggerExecute( gg_trg_Zombie_Sequence )
         gg_snd_H06MalGanis31.start()
+        mal.talk("Mal'Ganis")
     else if counter == 2
         gg_snd_H06MalGanis32.start()
+        mal.talk("Mal'Ganis")
     else if counter == 3
         cinema.flashLightning()
         cam = gg_cam_Camera_015
         cam.apply(15)
         gg_snd_H06Arthas43.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 4
         gg_snd_H06MalGanis44.start()
+        mal.talk("Mal'Ganis")
     else if counter == 5
         cam = gg_cam_Camera_016
         cam.apply(0)
         cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 25)
         gg_snd_H06MalGanis45.start()
+        mal.talk("Mal'Ganis")
     else if counter == 6
         gg_snd_H06Arthas46.start()
+        gg_unit_Hart_0073.walk(gg_rct_Region_024.getCenter())
+        getTimer()
+        ..start(1.5, () -> begin
+            gg_unit_Hart_0073.setAnimation("Stand Victory")
+        end)
+        arthas.talk("Arthas Menethil")
     else
         cinema.fadeOut(1)
         destroy Scene.current
@@ -216,12 +308,16 @@ function jainaAndUther()
         cam.apply(0)
         cam.setAttribute(attribute.TARGET_DISTANCE, 600, 30)
         gg_snd_H06Jaina50.start()
+        jaina.talk("Jaina Proudmoore")
     else if counter == 2
         gg_snd_H06Uther51.start()
+        uther.talk("Uther")
     else if counter == 3
         gg_snd_H06Jaina52.start()
+        jaina.talk("Jaina Proudmoore")
     else if counter == 4
         gg_snd_H06Uther53.start()
+        uther.talk("Uther")
     else
         cinema.fadeOut(1)
         destroy Scene.current
@@ -230,21 +326,31 @@ function burnShips()
     integer counter = Scene.current.counter
     if counter == 1
         cinema.setSky(Sky.winter)
-        cinema.fadeIn(2)
+        cinema.fadeIn(2, Filter.day)
         cam = gg_cam_Camera_018
         cam.apply(0)
         cam = gg_cam_Camera_019
         cam.apply(35)
         gg_snd_H08Arthas08.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 2
+        cam = gg_cam_Camera_032
+        cam.apply(0)
+        cam = gg_cam_Camera_033
+        cam.apply(4)
+        ConditionalTriggerExecute( gg_trg_Burn_Ships )
         gg_snd_H08Muradin09.start()
+        muradin.talk("Muradin Bronzebeard")
     else if counter == 3
         gg_unit_Hart_0106.setAnimation("Stand Victory")
         gg_snd_H08Arthas10.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 4
         gg_snd_H08Arthas13.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 4
         gg_snd_H08Arthas21.start()
+        arthas.talk("Arthas Menethil")
     else
         cinema.fadeOut(1)
         destroy Scene.current
@@ -254,29 +360,39 @@ function confrontArthas()
     integer counter = Scene.current.counter
     if counter == 1
         gg_snd_H09Muradin01.start()
+        muradin.talk("Muradin Bronzebeard")
     else if counter == 2
         gg_snd_H09Arthas02.start()
+        arthas.talk("Arthas Menethil")
     else
         destroy Scene.current
 
 function takeWeapon()
     integer counter = Scene.current.counter
     if counter == 1
-        cinema.fadeIn(2)
+        cinema.fadeIn(2, Filter.day)
         cam = gg_cam_Camera_020
         cam.apply(0)
         cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 60)
         gg_snd_H09Arthas14.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 2
         gg_unit_Hmbr_0108.walk(vec2(gg_rct_Region_002.getCenterX(), gg_rct_Region_002.getCenterY()))
         gg_snd_H09Muradin15.start()
+        muradin.talk("Muradin Bronzebeard")
     else if counter == 3
+        cam = gg_cam_Camera_034
+        cam.apply(0)
+        cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 60)
         gg_unit_Hmbr_0108.setFacing(gg_unit_Hmbr_0108.getPos().angleTo(gg_unit_Hart_0107.getPos()))
         gg_snd_H09Arthas16.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 4
         gg_snd_H09Muradin17.start()
+        muradin.talk("Muradin Bronzebeard")
     else if counter == 5
         gg_snd_H09Arthas18.start()
+        arthas.talk("Arthas Menethil")
     else
         cinema.fadeOut(1)
         destroy Scene.current
@@ -285,16 +401,20 @@ function killMalganis()
     integer counter = Scene.current.counter
     if counter == 1
         cinema.fadeIn(2)
-        cam = gg_cam_Camera_021
+        cam = gg_cam_Camera_035
         cam.apply(0)
-        gg_cam_Camera_022.apply(20)
+        cam.setAttribute(attribute.ROTATION, 50, 10)
+        ConditionalTriggerExecute(gg_trg_Battle)
         gg_snd_H09MalGanis25.start()
+        mal.talk("Mal'Ganis")
     else if counter == 2
         gg_snd_H09Arthas26.start()
+        arthas.talk("Arthas Menethil")
     else if counter == 3
-        gg_unit_Harf_0118.setTimeScale(0.05)
+        gg_unit_Harf_0118.setTimeScale(0.08)
         gg_unit_Harf_0118.setAnimation("attack")
         gg_snd_H09MalGanis27.start()
+        mal.talk("Mal'Ganis")
     else
         cinema.fadeOut(1)
         destroy Scene.current
@@ -303,19 +423,24 @@ function utherDeath()
     integer counter = Scene.current.counter
     if counter == 1
         cinema.setSky(Sky.fall)
-        cinema.fadeIn(2)
+        cinema.fadeIn(2, Filter.fall)
         cam = gg_cam_Camera_023
         cam.apply(0)
-        gg_cam_Camera_024.apply(35)
+        gg_cam_Camera_024.apply(33)
         gg_snd_U02Uther21.start()
+        uther.talk("Uther")
     else if counter == 2
         gg_snd_U02Uther23.start()
+        uther.talk("Uther")
     else if counter == 3
         gg_snd_U02Arthas24.start()
+        uarthas.talk("Arthas Menethil")
     else if counter == 4
         gg_snd_U02Uther25.start()
+        uther.talk("Uther")
     else if counter == 5
         gg_snd_U02Arthas26.start()
+        uarthas.talk("Arthas Menethil")
     else
         cinema.fadeOut(1)
         destroy Scene.current
@@ -323,54 +448,71 @@ function utherDeath()
 function summery()
     integer counter = Scene.current.counter
     if counter == 1
-        cinema.fadeIn(2)
+        cinema.fadeIn(2, Filter.fall)
         cam = gg_cam_Camera_025
         cam.apply(0)
         cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 55)
         gg_snd_Misc_Tirion_LHPostFight09.start()
+        tirion.talk("Tirion Fordring")
     else if counter == 2
         gg_snd_Misc_Tirion_LHPostFight10.start()
+        tirion.talk("Tirion Fordring")
     else if counter == 3
         gg_snd_Misc_Tirion_LHPostFight11.start()
+        tirion.talk("Tirion Fordring")
     else if counter == 4
+        cam = gg_cam_Camera_027
+        cam.apply(0)
+        cam = gg_cam_Camera_028
+        cam.apply(30)
         gg_snd_Misc_Tirion_LHPostFight12.start()
+        tirion.talk("Tirion Fordring")
     else if counter == 5
         gg_unit_Hpb2_0136.setAnimation("Stand Victory")
         gg_snd_Misc_Tirion_LHPostFight13.start()
+        tirion.talk("Tirion Fordring")
     else if counter == 6
         gg_snd_Misc_Tirion_LHPostFight14.start()
+        tirion.talk("Tirion Fordring")
     else if counter == 7
         gg_snd_Misc_Tirion_LHPostFight15.start()
+        tirion.talk("Tirion Fordring")
     else if counter == 8
         ResetTerrainFogBJ()
         FogMaskEnableOff()
         FogEnableOff()
-        gg_unit_Hart_0035.setMoveSpeed(30)
+        cinema.fadeIn(0, Filter.dark)
+        gg_unit_Hart_0035.setMoveSpeed(15)
         gg_unit_Hart_0035.setTimeScale(0.1)
-        gg_unit_Hart_0035.walk(vec2(gg_rct_Region_009.getCenterX(), gg_rct_Region_009.getCenterY()))
+        gg_unit_Hart_0035.walk(gg_rct_Region_009.getCenter())
         cam = gg_cam_Camera_026
         cam.apply(0)
         gg_snd_past.start()
+        fallen.talk("Captain Falric")
     else if counter == 9
         gg_unit_Hjai_0170.fadeOut(gg_snd_IC_Muradin_TurnIn06.length())
-        gg_snd_IC_Muradin_TurnIn06.start()
+        gg_snd_past2.start()
+        fallen.talk("Captain Marwyn")
     else if counter == 10
-        gg_unit_Huth_0171.fadeOut(gg_snd_IC_Muradin_TurnIn07.length())
-        gg_snd_IC_Muradin_TurnIn07.start()
+        gg_snd_U01Arthas05.start()
+        uarthas.talk("Arthas Menethil")
     else if counter == 11
+        gg_unit_Huth_0171.fadeOut(gg_snd_IC_Muradin_TurnIn07.length())
+        gg_snd_IC_Muradin_TurnIn06.start()
+        muradin.talk("Muradin Bronzebeard")
+    else if counter == 12
         gg_unit_Hmbr_0172.fadeOut(gg_snd_IC_Muradin_TurnIn08.length())
+        gg_snd_IC_Muradin_TurnIn07.start()
+        muradin.talk("Muradin Bronzebeard")
+    else if counter == 13
         StopMusicBJ(true)
-        cinema.fadeOut(gg_snd_IC_Muradin_TurnIn08.length())
         gg_snd_IC_Muradin_TurnIn08.start()
+        muradin.talk("Muradin Bronzebeard")
     else
+        cinema.fadeOut(0)
         destroy Scene.current
 
 init
-    cinema.fadeOut(0)
-    cam.apply(0)
-    cinema.on()
-    cinema.fadeIn(5)
-
     // -----------------------
     function start.newScene()
     function meetJaina.newScene()
@@ -387,9 +529,19 @@ init
     function utherDeath.newScene()
     function summery.newScene()
 
-    CreateTimer()
-    ..start(4, () -> begin
-        Scene.first.start()
-        GetExpiredTimer().destr()
+    getTimer()
+    ..start(0, () -> begin
+        cinema.fadeOut(0)
+        cam.apply(0)
+        cinema.on()
+        cam.setAttribute(attribute.TARGET_DISTANCE, 1000, 28)
+        gg_unit_Hart_0005.walk(gg_rct_Region_025.getCenter())
+        cinema.fadeIn(6)
+        getTimer()
+        ..start(3, () -> begin
+            Scene.first.next.next.next.next.next.next.next.next.next.next.next.start()
+            GetExpiredTimer().release()
+        end)
+        GetExpiredTimer().release()
     end)
     

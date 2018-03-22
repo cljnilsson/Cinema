@@ -2,8 +2,11 @@ package cinema
 
 import TimerUtils
 import cinemaHelpers
+import Colors
 
-force f = bj_FORCE_PLAYER[0]
+force f = bj_FORCE_PLAYER[0] //Defaults to only work on player 1
+
+public colorA lastFilter = COLOR_BLACK
 
 public enum Sky
     blizzard
@@ -15,6 +18,25 @@ public enum Sky
     summer
     winter
     outland
+
+
+public enum Filter
+    dark
+    day
+    fall
+
+function Filter.convert() returns colorA
+    colorA toReturn = colorA(0, 0, 0, 0)
+    switch this
+        case Filter.dark
+            toReturn = colorA(20, 20, 20, 50)
+        case Filter.day
+            toReturn = colorA(65, 65, 65, 50)
+        case Filter.fall
+            toReturn = colorA(100, 60, 20, 90)
+
+    lastFilter = toReturn
+    return toReturn
 
 function Sky.toString() returns string
     string toReturn = ""
@@ -56,6 +78,15 @@ public class cinema
     static function fadeIn(real duration)
         CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, duration, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
 
+    static function fadeIn(real duration, Filter f)
+        colorA color = f.convert()
+
+        CinematicFilterGenericBJ(duration, BLEND_MODE_MODULATE_2X, "ReplaceableTextures\\CameraMasks\\White_mask.blp", 0, 0, 0, 0, color.red.toReal(), color.green.toReal(), color.blue.toReal(), color.alpha.toReal() )
+
+    static function fadeIn(real duration, colorA color)
+
+        CinematicFilterGenericBJ(duration, BLEND_MODE_MODULATE_2X, "ReplaceableTextures\\CameraMasks\\White_mask.blp", 0, 0, 0, 0, color.red.toReal(), color.green.toReal(), color.blue.toReal(), color.alpha.toReal() )
+
     static function fadeOut(real duration)
         CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, duration, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
 
@@ -83,10 +114,7 @@ public class cinema
             GetExpiredTimer().destr()
             getTimer()
             ..start(0.2, () -> begin
+                fadeIn(0, lastFilter)
                 gg_snd_RollingThunder1.start()
             end)
         end)
-
-init
-    cinema.forceSubtitles()
-    //scinema.occlusionOn()

@@ -4,6 +4,8 @@ import TimerUtils
 import cinemaHelpers
 import LinkedListModule
 
+@configureable boolean autoStart = true //Automatically starts the next scene, leave true if you only have a single cinematic with multiple scenes.
+
 trigger t = CreateTrigger()
 
 function boolexpr.callback()
@@ -30,7 +32,6 @@ public class Scene
 
         time = CreateTimer()
         time.setData(this castTo integer)
-        //add delay?
         time.start(0, function onStart)
 
     static function onStart()
@@ -46,5 +47,11 @@ public class Scene
 
     ondestroy
         time.destr()
-        if(next != null)
-            next.start()
+        if(autoStart and next != null)
+            getTimer()
+            ..setData(this.next castTo int)
+            ..start(1, () -> begin
+                timer t = GetExpiredTimer()
+                t.getData() castTo thistype .start()
+                t.release()
+            end)

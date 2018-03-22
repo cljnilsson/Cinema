@@ -45,7 +45,7 @@ public function camerasetup.apply(player p, real duration)
 public function camerasetup.apply(real duration)
 	if (players[0].isLocalPlayer())
 		CameraSetupApplyForceDuration(this, true, duration)
-
+		
 public function camerasetup.setAttribute(attribute a, real value, real duration)
 	if (players[0].isLocalPlayer())
 		SetCameraField(a.A2CF(), value, duration)
